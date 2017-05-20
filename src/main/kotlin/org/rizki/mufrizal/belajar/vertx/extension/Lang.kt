@@ -17,6 +17,6 @@ fun logger(clz: KClass<*>): Logger {
 }
 
 // konfigurasi logback secara default menggunakan SLF4J
-fun useLogBacl() {
+fun useLogBack() {
     System.setProperty(LoggerFactory.LOGGER_DELEGATE_FACTORY_CLASS_NAME, SLF4JLogDelegateFactory::class.java.name)
 }
