@@ -1,26 +1,26 @@
 <configuration>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender" level="INFO">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex{short}</pattern>
+            <pattern>%d %-5level %logger{35} - %msg %n</pattern>
         </encoder>
     </appender>
-
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>info</level>
-        </filter>
-        <encoder>
-            <pattern>%date{dd MMM yyyy;HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex{full}</pattern>
-        </encoder>
-        <file>/var/log/kotlin/vertx.log</file>
+        <prudent>true</prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/var/log/kotlin/vertx.log.%d{yyyy-MM-dd}</fileNamePattern>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-    </appender>
+            <!-- ganti file setiap jam -->
+            <fileNamePattern>
+                logs/%d{yyyy-MM-dd_HH}/vertx.log
+            </fileNamePattern>
 
+            <!-- simpan file selama sebulan (24 * 31) -->
+            <maxHistory>384</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d %-5level %logger{35} - %msg %n</pattern>
+        </encoder>
+    </appender>
 
     <logger name="io.vertx" level="ERROR">
         <appender-ref ref="STDOUT"/>
